@@ -60,7 +60,10 @@ io.on('connection', function(socket){
   socket.on('execute', function(data){
      let code = data.message;
      python.exec(code).then(function(results){
-	 socket.emit('executionresults', {response: results});
+	 newresults = results.replace('\n', '<br>');
+	 socket.emit('executionresults', {response: newresults});
+     }).catch((error) => {
+      console.log(error.reason)
      });
   })
 
