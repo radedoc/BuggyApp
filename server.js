@@ -8,6 +8,7 @@ var mongodb = require('mongodb');
 var request = require('request');
 var cheerio = require('cheerio');
 var google = require('google');
+var python = require('python-runner'); 
 google.resultsPerPage = 1
 
 /******************************** Setup ************************************************/
@@ -54,6 +55,13 @@ io.on('connection', function(socket){
     }).catch((error) => {
       console.log(error.reason)
     })
+  })
+
+  socket.on('execute', function(data){
+     let code = data.message;
+     python.exec(code).then(function(results){
+	 socket.emit('executionresults', {response: results});
+     });
   })
 
   socket.on('save', function(data){

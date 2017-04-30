@@ -25,6 +25,7 @@
     "grunt-cli": "^1.2.0",
     "http": "0.0.0",
     "path": "^0.12.7",
+    "python-runner": "1.1.0",
     "request": "^2.73.0",
     "socket.io": "^1.7.3"
   }

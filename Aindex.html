@@ -64,6 +64,10 @@
             document.getElementById("snippet").innerHTML += data.response + '<br>';
            });
 
+           socket.on('executionresults', function(data){
+            document.getElementById("terminal").innerHTML += data.response + '<br>';
+           });
+
            socket.on('welcome', function(data){
             document.getElementById("snippet").innerHTML += data.message + '<br>';
            });
@@ -94,6 +98,12 @@
                   socket.emit('search', {message: query});
                   break;
                 }
+		else if ((messages[i+1] == "please") && (messages[i+2] == "run")) {
+		  var text = editor.getValue();
+	          document.getElementById("terminal").innerHTML += "Executing code:" + '<br>';
+                  socket.emit('execute', {message: text});
+	          break;
+		}
                 else if ((messages[i+1] == "save") && (messages[i+2] == 'file')) {
                   var fileContent = editor.getValue();
                   var filename = messages[i+4]
@@ -107,8 +117,8 @@
                 if (messages[i] == "quote"){
                   editor.insert("\"");
                 }
-                else if (messages[i] == 'enter'){
-                  editor.insert('\n');
+                else if (messages[i] == 'new'){
+		  editor.insert("\n");
                 }
                 else if (messages[i] == 'space'){
                   editor.navigateDown(1);
