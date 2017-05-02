@@ -120,11 +120,14 @@
 		else if (messages[i] == "Focus") {
 		  editor.focus();
 	        }
-		else if (messages[i] == "star") {
+		else if ((messages[i] == "star") || (messages[i] == "asterisk")) {
 		  editor.insert("*");
 		}
-		else if (messages[i] == "pound") {
+		else if ((messages[i] == "pound") || (messages[i] == "hashtag")) {
 		  editor.insert("#");
+		}
+		else if ((messages[i] == "percent") || (messages[i] == "modulo")) {
+		  editor.insert("%");
 		}
 		else if (messages[i] == "comma") {
 		  editor.insert(",");
